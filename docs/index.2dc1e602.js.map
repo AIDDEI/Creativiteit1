@@ -1,0 +1,1 @@
+{"mappings":"AAAA,MAAM,IAAI;CAET;AAED,IAAI,IAAI,EAAE,CAAC","sources":["src/game.ts"],"sourcesContent":["class Game {\r\n\r\n}\r\n\r\nnew Game();"],"names":[],"version":3,"file":"index.2dc1e602.js.map","sourceRoot":"/__parcel_source_root/"}
