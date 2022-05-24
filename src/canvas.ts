@@ -67,8 +67,7 @@ export class Canvas {
     }
     
     private clearCanvas() {
-        this.context
-            .clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.clickX = [];
         this.clickY = [];
         this.clickDrag = [];
@@ -127,3 +126,4 @@ export class Canvas {
         newTab.document.write("<img src='" + dataURL + "' alt='from canvas'/>");
     }
 }
+new Canvas();
