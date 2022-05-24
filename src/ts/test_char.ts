@@ -38,12 +38,12 @@ export class Char extends PIXI.Sprite {
         }
     }
 
-    resetPosition() {
+    private resetPosition() {
         this.x = 80;
         this.y = 60;
     }
 
-    onKeyDown(e: KeyboardEvent): void {
+    private onKeyDown(e: KeyboardEvent): void {
         if(e.key === " " || e.key === "ArrowUp" || e.key === "w"){
             if(this.yspeed === 0){
                 this.yspeed = -9;
