@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
-import testChar from '../images/Char1.png';
-import testBack from '../images/test_back.jpg';
-import testGround from '../images/test_ground.png';
+import testChar from '../images/Char1_1.png';
+import testBack from '../images/test_background2.jpg';
+import testGround from '../images/test_ground2.jpg';
 
 import { Char } from './test_char';
 import { Ground } from './test_ground';
@@ -31,8 +31,6 @@ export class Game{
     }
 
     loadCompleted(){
-        
-
         let background = new PIXI.Sprite(this.loader.resources["backgroundTexture"].texture!);
         background.height = this.pixiHeight;
         background.width = this.pixiWidth;
@@ -48,7 +46,11 @@ export class Game{
     }
 
     private update(delta: number){
-        this.char.update();
+        this.char.update(delta);
+
+        if(this.char.collideGround(this.ground)){
+            this.char.yspeed = 0;
+        }
     }
 }
 

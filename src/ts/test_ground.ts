@@ -5,8 +5,11 @@ export class Ground extends PIXI.Sprite{
 
     constructor(texture: PIXI.Texture, game: Game){
         super(texture);
-        this.height = 85;
+
         this.x = 0;
-        this.y = 400;
+        this.y = 350;
+
+        this.width = 500;
+        this.height = 70;
     }
 }
