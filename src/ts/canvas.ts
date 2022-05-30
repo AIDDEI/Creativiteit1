@@ -11,15 +11,16 @@ export class Canvas {
         let canvas = document.getElementById('canvas') as
                     HTMLCanvasElement;
         let context = canvas.getContext("2d");
+        let paintColor = //HIER KLEUR OPVRAGEN VAN SITE (buttons die kleur doorgeven, basic kleuren pallet) 
         context.lineCap = 'round';
         context.lineJoin = 'round';
-        context.strokeStyle = 'black';
+        context.strokeStyle = paintColor;
         context.lineWidth = 1;
 
         this.canvas = canvas;
         this.context = context;
 
-        this.redraw();
+        this.redraw();'=7\'
         this.createUserEvents();
     }
 
