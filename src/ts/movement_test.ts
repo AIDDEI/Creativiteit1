@@ -65,6 +65,7 @@ export class Game{
             this.char.yspeed = 0;
         }
 
+        this.char.collisionHorizontal(this.ground);
         this.char.collisionHorizontal(this.block);
     }
 }

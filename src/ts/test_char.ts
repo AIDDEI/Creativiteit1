@@ -55,8 +55,9 @@ export class Char extends PIXI.Sprite {
     }
 
     public collisionHorizontal(object: PIXI.Sprite){
-        if(this.x + this.width >= object.x && this.x < object.x + object.width){
+        if(this.x + this.width >= object.x && this.x + this.width < object.x + object.width){
             if(this.y === object.y || this.y < object.y && this.y > object.y - object.height){
+                console.log(`collision Right; Player X: ${this.x}, Player Y: ${this.y}`);
                 this.walkRightLock = true;
                 this.walkRight = false;
                 this.x = object.x - this.width - 1;
@@ -65,8 +66,9 @@ export class Char extends PIXI.Sprite {
             this.walkRightLock = false;
         }
 
-        if(this.x <= object.x + object.width && this.x + this.width > object.x){
+        if(this.x <= object.x + object.width && this.x > object.x){
             if(this.y === object.y || this.y < object.y && this.y > object.y - object.height){
+                console.log(`collision Left; Player X: ${this.x}, Player Y: ${this.y}`);
                 this.walkLeftLock = true;
                 this.walkLeft = false;
                 this.x = object.x + object.width + 1;
