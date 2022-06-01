@@ -30,7 +30,7 @@ export class Char extends PIXI.Sprite {
         }
     }
 
-    collideGround(object: PIXI.Sprite) {
+    collisionVertical(object: PIXI.Sprite) {
         if(this.x > object.x + object.width || this.x + this.width < object.x || this.y > object.y + object.height || this.y + this.height < object.y){
             return false;
         } else {
