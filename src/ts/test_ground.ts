@@ -1,9 +1,8 @@
 import * as PIXI from 'pixi.js';
-import { Game } from './movement_test';
 
 export class Ground extends PIXI.Sprite{
 
-    constructor(texture: PIXI.Texture, game: Game){
+    constructor(texture: PIXI.Texture){
         super(texture);
 
         this.x = 0;
