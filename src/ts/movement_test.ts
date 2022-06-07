@@ -52,7 +52,7 @@ export class Game{
         this.pixi.ticker.add((delta) => this.update(delta));
     }
 
-    update(delta: number){
+    private update(delta: number){
         this.char.update(delta);
 
         if(this.char.collisionVerticalTop(this.ground) && this.char.y + this.char.height < this.ground.y + this.char.yspeed){
