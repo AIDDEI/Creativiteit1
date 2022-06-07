@@ -1,12 +1,12 @@
 import * as PIXI from 'pixi.js';
 
-export class Char extends PIXI.Sprite {
+export class Char extends PIXI.AnimatedSprite {
     xspeed = 0;
     yspeed = 3;
     weigth = 0.3;
 
-    constructor(texture: PIXI.Texture){
-        super(texture);
+    constructor(textures: PIXI.Texture[]){
+        super(textures);
         this.anchor.set(0);
 
         this.x = 80;
@@ -17,9 +17,14 @@ export class Char extends PIXI.Sprite {
 
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e));
         window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e));
+
+        this.animationSpeed = 0.04;
+        this.play()
     }
 
     update(delta: number) {
+        super.update(delta);
+        console.log('hi');
         this.x += delta * this.xspeed;
         this.y += delta * this.yspeed;
 
