@@ -1,19 +1,25 @@
 import * as PIXI from 'pixi.js';
+// import { Ground } from './test_ground';
 
 export class Char extends PIXI.AnimatedSprite {
+
     xspeed = 0;
     yspeed = 3;
     weigth = 0.3;
+    walkRight = false;
+    walkLeft = false;
+    walkLeftLock = false;
+    walkRightLock = false;
 
     constructor(textures: PIXI.Texture[]){
         super(textures);
         this.anchor.set(0);
 
         this.x = 80;
-        this.y = 60;
+        this.y = 90;
 
-        this.width = 51;
-        this.height = 72;
+        this.width = 72;
+        this.height = 82;
 
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e));
         window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e));
@@ -22,9 +28,9 @@ export class Char extends PIXI.AnimatedSprite {
         this.play()
     }
 
-    update(delta: number) {
+    public update(delta: number) {
         super.update(delta);
-        console.log('hi');
+       
         this.x += delta * this.xspeed;
         this.y += delta * this.yspeed;
 
@@ -33,9 +39,21 @@ export class Char extends PIXI.AnimatedSprite {
         if(this.y > 500){
             this.resetPosition();
         }
+
+        if(this.walkLeft === true){
+            this.xspeed = -5;
+        }
+
+        if(this.walkRight === true){
+            this.xspeed = 5;
+        }
+
+        if(this.walkLeft === false && this.walkRight === false){
+            this.xspeed = 0;
+        }
     }
 
-    collideGround(object: PIXI.Sprite) {
+    public collisionVerticalTop(object: PIXI.Sprite) {
         if(this.x > object.x + object.width || this.x + this.width < object.x || this.y > object.y + object.height || this.y + this.height < object.y){
             return false;
         } else {
@@ -43,11 +61,34 @@ export class Char extends PIXI.AnimatedSprite {
         }
     }
 
-    private resetPosition() {
-        this.x = 80;
-        this.y = 60;
+    public collisionHorizontal(object: PIXI.Sprite){
+        if(this.x + this.width >= object.x && this.x + this.width < object.x + object.width){
+            if(this.y === object.y || this.y < object.y && this.y > object.y - object.height){
+                this.walkRightLock = true;
+                this.walkRight = false;
+                this.x = object.x - this.width - 1;
+            }
+        } else {
+            this.walkRightLock = false;
+        }
+        if(this.x <= object.x + object.width && this.x > object.x){
+            if(this.y === object.y || this.y < object.y && this.y > object.y - object.height){
+                this.walkLeftLock = true;
+                this.walkLeft = false;
+                this.x = object.x + object.width + 1;
+            }
+        } else {
+            this.walkLeftLock = false;
+        }
     }
 
+    private resetPosition() {
+        this.x = 80;
+        this.y = 1;
+    }
+
+
+    
     private onKeyDown(e: KeyboardEvent): void {
         if(e.key === " " || e.key === "ArrowUp" || e.key === "w"){
             if(this.yspeed === 0){
@@ -57,11 +98,15 @@ export class Char extends PIXI.AnimatedSprite {
         switch (e.key.toUpperCase()) {
             case "A":
             case "ARROWLEFT":
-                this.xspeed = -5
+                if(!this.walkLeftLock){
+                    this.walkLeft = true
+                }
                 break;
             case "D":
             case "ARROWRIGHT":
-                this.xspeed = 5
+                if(!this.walkRightLock){
+                    this.walkRight = true
+                }
                 break;
         }
     }
@@ -69,11 +114,14 @@ export class Char extends PIXI.AnimatedSprite {
     private onKeyUp(e: KeyboardEvent): void {
         switch (e.key.toUpperCase()) {
             case "A":
-            case "D":
             case "ARROWLEFT":
+                this.walkLeft = false
+                break;
+            case "D":
             case "ARROWRIGHT":
-                this.xspeed = 0
+                this.walkRight = false
                 break;
         }
     }
 }
+
