@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "scripts": {
         "start": "parcel src/*.html --dist-dir docs",
-        "build": "parcel build src/*.html --dist-dir docs --public-url ./"
+        "build": "parcel build src/*.html --dist-dir docs --public-url ./",
+        "deploy": "npm run build && gh-pages -d dist -b master"
     },
     "keywords": [],
     "author": "",
