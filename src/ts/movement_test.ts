@@ -4,7 +4,7 @@ import testBack from '../images/test_background2.jpg';
 import testGround from '../images/test_ground2.jpg';
 import testBlock from '../images/block.jpg';
 
-import { Char } from './test_char';
+import { Char } from './test_char_spritesheet';
 import { Ground } from './test_ground';
 import { Block } from './test_block';
 
@@ -19,7 +19,10 @@ export class Game{
     ground : Ground;
     block : Block;
 
+    characterSpriteTextures: PIXI.Texture[] = [];
+
     constructor(){
+        // console.log('hi');
         this.pixi = new PIXI.Application({width: this.pixiWidth, height: this.pixiHeight});
         this.pixi.stage.interactive = true;
         this.pixi.stage.hitArea = this.pixi.renderer.screen;
@@ -30,11 +33,13 @@ export class Game{
             .add('charTexture', testChar)
             .add('backgroundTexture', testBack)
             .add('groundTexture', testGround)
-            .add('blockTexture', testBlock);
+            .add('blockTexture', testBlock)
+            .add("Spritesheet1", "Spritesheet1.json");
         this.loader.load(()=>this.loadCompleted());
     }
 
     loadCompleted(){
+        
         let background = new PIXI.Sprite(this.loader.resources["backgroundTexture"].texture!);
         background.height = this.pixiHeight;
         background.width = this.pixiWidth;
@@ -43,19 +48,35 @@ export class Game{
         this.ground = new Ground(this.loader.resources["groundTexture"].texture!);
         this.pixi.stage.addChild(this.ground);
 
+
+        for(let i = 1; i <= 4; i++){
+            
+            const texture = PIXI.Texture.from(`Char${i}.png`);
+            this.characterSpriteTextures.push(texture);
+        }
+
+        // this.char = new Char(this.loader.resources["charTexture"].texture!);
+        // this.pixi.stage.addChild(this.char);
+
         this.block = new Block(this.loader.resources["blockTexture"].texture!);
         this.pixi.stage.addChild(this.block);
 
-        this.char = new Char(this.loader.resources["charTexture"].texture!);
-        this.pixi.stage.addChild(this.char);
 
         this.pixi.ticker.add((delta) => this.update(delta));
+        this.createMovement();
+    }
+
+    createMovement(){
+        this.char = new Char(this.characterSpriteTextures);
+    
+        this.pixi.stage.addChild(this.char);
     }
 
     private update(delta: number){
         this.char.update(delta);
 
         if(this.char.collisionVerticalTop(this.ground) && this.char.y + this.char.height < this.ground.y + this.char.yspeed){
+            console.log('hoi')
             this.char.y = this.ground.y - this.char.height;
             this.char.yspeed = 0;
         }
@@ -68,6 +89,7 @@ export class Game{
         this.char.collisionHorizontal(this.ground);
         this.char.collisionHorizontal(this.block);
     }
+       
 }
 
 new Game();
