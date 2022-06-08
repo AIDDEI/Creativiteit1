@@ -55,7 +55,11 @@ export class Char extends PIXI.Sprite {
     }
 
     public collisionVerticalBottom(object: PIXI.Sprite) {
-        
+        if(this.y + this.height > object.y && this.y < object.y + object.height){
+            if(this.x + this.width > object.x && this.x < object.x + object.width){
+                this.yspeed = 3;
+            }
+        }
     }
 
     public collisionHorizontal(object: PIXI.Sprite){

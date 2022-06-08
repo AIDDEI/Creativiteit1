@@ -3,3 +3,4 @@
 .parcel-cache/data.mdb
 docs/*
 src/ts/canvas.ts
+src/index.html

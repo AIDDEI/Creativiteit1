@@ -7,6 +7,7 @@ import testBlock from '../images/block.jpg';
 import { Char } from './test_char';
 import { Ground } from './test_ground';
 import { Block } from './test_block';
+import { UI } from './UI';
 
 export class Game{
     pixiWidth = 800;
@@ -18,6 +19,8 @@ export class Game{
     char : Char;
     ground : Ground;
     block : Block;
+
+    interface : UI;
 
     constructor(){
         this.pixi = new PIXI.Application({width: this.pixiWidth, height: this.pixiHeight});
@@ -34,7 +37,7 @@ export class Game{
         this.loader.load(()=>this.loadCompleted());
     }
 
-    private loadCompleted(){
+    loadCompleted(){
         let background = new PIXI.Sprite(this.loader.resources["backgroundTexture"].texture!);
         background.height = this.pixiHeight;
         background.width = this.pixiWidth;
@@ -49,8 +52,13 @@ export class Game{
         this.char = new Char(this.loader.resources["charTexture"].texture!);
         this.pixi.stage.addChild(this.char);
 
+        this.interface = new UI()
+        this.pixi.stage.addChild(this.interface)
+
         this.pixi.ticker.add((delta) => this.update(delta));
     }
+
+    doomClock:number = 600 
 
     private update(delta: number){
         this.char.update(delta);
@@ -67,9 +75,14 @@ export class Game{
 
         this.char.collisionHorizontal(this.ground);
         this.char.collisionHorizontal(this.block);
-
-        this.char.collisionVerticalBottom(this.block);
-        this.char.collisionVerticalBottom(this.ground);
+        
+        this.doomClock-=delta
+        let secondsLeft = Math.floor(this.doomClock / 60)
+        if(this.doomClock <= 0) {
+            console.log("Doomsday has come!")
+        } else {
+            console.log(`Only ${secondsLeft} seconds left!`)
+        }
     }
 }
 
