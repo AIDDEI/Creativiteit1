@@ -2,8 +2,8 @@
     "name": "game-creativiteit1",
     "version": "1.0.0",
     "scripts": {
-        "start": "parcel src/index.html --dist-dir docs",
-        "build": "parcel build src/index.html --dist-dir docs --public-url ./"
+        "start": "parcel src/*.html --dist-dir docs",
+        "build": "parcel build src/*.html --dist-dir docs --public-url ./"
     },
     "keywords": [],
     "author": "",
@@ -13,7 +13,6 @@
     },
     "devDependencies": {
         "parcel": "^2.4.0",
-        "parcel-reporter-static-files-copy": "^1.3.4",
         "querystring-es3": "^0.2.1",
         "typescript": "^4.6.2"
     }
