@@ -54,9 +54,13 @@ export class Char extends PIXI.Sprite {
         }
     }
 
+    public collisionVerticalBottom(object: PIXI.Sprite) {
+        
+    }
+
     public collisionHorizontal(object: PIXI.Sprite){
         if(this.x + this.width >= object.x && this.x + this.width < object.x + object.width){
-            if(this.y === object.y || this.y < object.y && this.y > object.y - object.height){
+            if(this.y === object.y || this.y - this.height + 5 < object.y && this.y > object.y - object.height){
                 this.walkRightLock = true;
                 this.walkRight = false;
                 this.x = object.x - this.width - 1;
@@ -66,7 +70,7 @@ export class Char extends PIXI.Sprite {
         }
 
         if(this.x <= object.x + object.width && this.x > object.x){
-            if(this.y === object.y || this.y < object.y && this.y > object.y - object.height){
+            if(this.y === object.y || this.y - this.height + 5 < object.y && this.y > object.y - object.height){
                 this.walkLeftLock = true;
                 this.walkLeft = false;
                 this.x = object.x + object.width + 1;
