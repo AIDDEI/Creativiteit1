@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 
-export class Char1 extends PIXI.Sprite {
+export class Char extends PIXI.Sprite {
     xspeed = 0;
     yspeed = 3;
     weigth = 0.3;
