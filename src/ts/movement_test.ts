@@ -67,6 +67,9 @@ export class Game{
 
         this.char.collisionHorizontal(this.ground);
         this.char.collisionHorizontal(this.block);
+
+        this.char.collisionVerticalBottom(this.block);
+        this.char.collisionVerticalBottom(this.ground);
     }
 }
 
