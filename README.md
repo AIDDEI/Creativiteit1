@@ -1,2 +1,3 @@
 # Creativiteit1
-Onze game/prototype kan worden gespeeld via deze link: <a href="https://aiddei.github.io/Creativiteit1/">game/prototype</a>
+Voor de beoordelaars van onze game/prototype:
+Helaas werkt onze game niet via Github-pages, dus ons project moet worden gekopieerd in Visual Studio, excuus.
