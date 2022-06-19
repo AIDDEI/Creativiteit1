@@ -1,13 +1,16 @@
 import * as PIXI from 'pixi.js';
+import jumpSoundFile from 'url:../sound/jump.mp3';
 
 export class Char extends PIXI.Sprite {
-    xspeed = 0;
-    yspeed = 3;
-    weigth = 0.3;
-    walkRight = false;
-    walkLeft = false;
-    walkLeftLock = false;
-    walkRightLock = false;
+    public xspeed = 0;
+    public yspeed = 3;
+    private weigth = 0.3;
+    private walkRight = false;
+    private walkLeft = false;
+    private walkLeftLock = false;
+    private walkRightLock = false;
+
+    private jump: HTMLAudioElement = new Audio(jumpSoundFile);
 
     constructor(texture: PIXI.Texture){
         super(texture);
@@ -93,6 +96,7 @@ export class Char extends PIXI.Sprite {
         if(e.key === " " || e.key === "ArrowUp" || e.key === "w"){
             if(this.yspeed === 0){
                 this.yspeed = -9;
+                this.jump.play();
             }
         }
         switch (e.key.toUpperCase()) {

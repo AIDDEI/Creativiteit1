@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+
 import testChar from '../images/Char1_1.png';
 import testBack from '../images/test_background2.jpg';
 import testGround from '../images/test_ground2.jpg';
