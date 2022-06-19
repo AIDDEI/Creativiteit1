@@ -1,13 +1,17 @@
+// Import PIXI
 import * as PIXI from 'pixi.js';
 
+// Import Images
 import testChar from '../images/Char1_1.png';
 import testBack from '../images/test_background2.jpg';
 import testGround from '../images/test_ground2.jpg';
 import testBlock from '../images/block.jpg';
 
+// Import Classes
 import { Char } from './test_char';
 import { Ground } from './test_ground';
 import { Block } from './test_block';
+import { Background } from './background';
 
 export class Game{
     pixiWidth = 800;
@@ -19,13 +23,16 @@ export class Game{
     char : Char;
     ground : Ground;
     block : Block;
+    background : Background;
 
     constructor(){
+        // Create PIXI Stage
         this.pixi = new PIXI.Application({width: this.pixiWidth, height: this.pixiHeight});
         this.pixi.stage.interactive = true;
         this.pixi.stage.hitArea = this.pixi.renderer.screen;
         document.body.appendChild(this.pixi.view);
 
+        // Create Loader
         this.loader = new PIXI.Loader();
         this.loader
             .add('charTexture', testChar)
@@ -36,10 +43,8 @@ export class Game{
     }
 
     private loadCompleted(){
-        let background = new PIXI.Sprite(this.loader.resources["backgroundTexture"].texture!);
-        background.height = this.pixiHeight;
-        background.width = this.pixiWidth;
-        this.pixi.stage.addChild(background);
+        this.background = new Background(this.loader.resources["backgroundTexture"].texture!, this.pixiWidth, this.pixiHeight);
+        this.pixi.stage.addChild(this.background);
 
         this.ground = new Ground(this.loader.resources["groundTexture"].texture!);
         this.pixi.stage.addChild(this.ground);
