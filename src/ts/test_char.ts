@@ -4,6 +4,7 @@ import jumpSoundFile from 'url:../sound/jump.wav';
 import deathSoundFile from 'url:../sound/death.wav';
 import footstepSoundFile from 'url:../sound/footstep.wav';
 import pushSoundFile from 'url:../sound/push.wav';
+import headBumpSoundFile from 'url:../sound/head_bump.wav';
 
 export class Char extends PIXI.Sprite {
     public xspeed = 0;
@@ -18,6 +19,7 @@ export class Char extends PIXI.Sprite {
     private deathSound: HTMLAudioElement = new Audio(deathSoundFile);
     private footstepSound: HTMLAudioElement = new Audio(footstepSoundFile);
     private pushSound: HTMLAudioElement = new Audio(pushSoundFile);
+    private headBumpSound: HTMLAudioElement = new Audio(headBumpSoundFile);
 
     constructor(texture: PIXI.Texture){
         super(texture);
@@ -69,6 +71,7 @@ export class Char extends PIXI.Sprite {
         if(this.y + this.height > object.y && this.y < object.y + object.height){
             if(this.x + this.width > object.x && this.x < object.x + object.width){
                 this.yspeed = 3;
+                this.headBumpSound.play();
             }
         }
     }
