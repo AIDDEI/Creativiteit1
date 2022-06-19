@@ -1,5 +1,9 @@
 import * as PIXI from 'pixi.js';
-import jumpSoundFile from 'url:../sound/jump.mp3';
+
+import jumpSoundFile from 'url:../sound/jump.wav';
+import deathSoundFile from 'url:../sound/death.wav';
+import footstepSoundFile from 'url:../sound/footstep.wav';
+import pushSoundFile from 'url:../sound/push.wav';
 
 export class Char extends PIXI.Sprite {
     public xspeed = 0;
@@ -10,7 +14,10 @@ export class Char extends PIXI.Sprite {
     private walkLeftLock = false;
     private walkRightLock = false;
 
-    private jump: HTMLAudioElement = new Audio(jumpSoundFile);
+    private jumpSound: HTMLAudioElement = new Audio(jumpSoundFile);
+    private deathSound: HTMLAudioElement = new Audio(deathSoundFile);
+    private footstepSound: HTMLAudioElement = new Audio(footstepSoundFile);
+    private pushSound: HTMLAudioElement = new Audio(pushSoundFile);
 
     constructor(texture: PIXI.Texture){
         super(texture);
@@ -33,6 +40,7 @@ export class Char extends PIXI.Sprite {
         this.yspeed += this.weigth;
 
         if(this.y > 500){
+            this.deathSound.play();
             this.resetPosition();
         }
 
@@ -71,6 +79,7 @@ export class Char extends PIXI.Sprite {
                 this.walkRightLock = true;
                 this.walkRight = false;
                 this.x = object.x - this.width - 1;
+                this.pushSound.play();
             }
         } else {
             this.walkRightLock = false;
@@ -81,6 +90,7 @@ export class Char extends PIXI.Sprite {
                 this.walkLeftLock = true;
                 this.walkLeft = false;
                 this.x = object.x + object.width + 1;
+                this.pushSound.play();
             }
         } else {
             this.walkLeftLock = false;
@@ -96,20 +106,22 @@ export class Char extends PIXI.Sprite {
         if(e.key === " " || e.key === "ArrowUp" || e.key === "w"){
             if(this.yspeed === 0){
                 this.yspeed = -9;
-                this.jump.play();
+                this.jumpSound.play();
             }
         }
         switch (e.key.toUpperCase()) {
             case "A":
             case "ARROWLEFT":
                 if(!this.walkLeftLock){
-                    this.walkLeft = true
+                    this.walkLeft = true;
+                    this.footstepSound.play();
                 }
                 break;
             case "D":
             case "ARROWRIGHT":
                 if(!this.walkRightLock){
-                    this.walkRight = true
+                    this.walkRight = true;
+                    this.footstepSound.play();
                 }
                 break;
         }
