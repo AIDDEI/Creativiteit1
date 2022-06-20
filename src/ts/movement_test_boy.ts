@@ -39,16 +39,14 @@ export class Game{
         this.loader.load(()=>this.loadCompleted());
     }
 
-    addBackground() {
-        this.bg = new Background(this.pixi.loader.resources["backgroundTexture"].texture!, this.pixi.screen.width, this.pixi.screen.height)
-        this.pixi.stage.addChild(this.bg)
-    }
-
     loadCompleted(){
         // let background = new PIXI.Sprite(this.loader.resources["backgroundTexture"].texture!);
         // background.height = this.pixiHeight;
         // background.width = this.pixiWidth;
         // this.pixi.stage.addChild(background);
+
+        this.bg = new Background(this.pixi.loader.resources["backgroundTexture"].texture!, this.pixi.screen.width, this.pixi.screen.height)
+        this.pixi.stage.addChild(this.bg)
 
         this.ground = new Ground(this.loader.resources["groundTexture"].texture!);
         this.pixi.stage.addChild(this.ground);
