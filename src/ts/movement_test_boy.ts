@@ -8,6 +8,7 @@ import { Char } from './test_char';
 import { Ground } from './test_ground';
 import { Block } from './test_block';
 import { UI } from './UI';
+import { Background } from './background';
 
 export class Game{
     pixiWidth = 800;
@@ -19,6 +20,7 @@ export class Game{
     char : Char;
     ground : Ground;
     block : Block;
+    bg : Background;
 
     interface : UI;
 
@@ -37,11 +39,16 @@ export class Game{
         this.loader.load(()=>this.loadCompleted());
     }
 
+    addBackground() {
+        this.bg = new Background(this.pixi.loader.resources["backgroundTexture"].texture!, this.pixi.screen.width, this.pixi.screen.height)
+        this.pixi.stage.addChild(this.bg)
+    }
+
     loadCompleted(){
-        let background = new PIXI.Sprite(this.loader.resources["backgroundTexture"].texture!);
-        background.height = this.pixiHeight;
-        background.width = this.pixiWidth;
-        this.pixi.stage.addChild(background);
+        // let background = new PIXI.Sprite(this.loader.resources["backgroundTexture"].texture!);
+        // background.height = this.pixiHeight;
+        // background.width = this.pixiWidth;
+        // this.pixi.stage.addChild(background);
 
         this.ground = new Ground(this.loader.resources["groundTexture"].texture!);
         this.pixi.stage.addChild(this.ground);
@@ -83,7 +90,10 @@ export class Game{
         } else {
             console.log(`Only ${secondsLeft} seconds left!`)
         }
+
+        this.bg.update()
     }
+    
 }
 
 new Game();
