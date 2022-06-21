@@ -138,8 +138,7 @@ export class Char extends PIXI.Sprite {
 
     private resetPosition() {
         // The respawn position of the player
-        this.x = 80;
-        this.y = 60;
+        window.location.href="death.html";
     }
 
     private onKeyDown(e: KeyboardEvent): void {
