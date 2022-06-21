@@ -1,11 +1,11 @@
 {
     "compilerOptions": {
-        "target": "es6", //Deze voor canvas
+        "target": "es6",
         "strict": true,
         "noImplicitAny": true,
         "noImplicitThis": true,
         "strictPropertyInitialization": false,
-        "module": "ES6", //commonjs (?)
+        "module": "ES6",
         "sourceMap": true,
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
