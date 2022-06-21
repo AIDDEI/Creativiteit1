@@ -2,5 +2,6 @@
 .parcel-cache/lock.mdb
 .parcel-cache/data.mdb
 docs/*
+docs
 src/ts/canvas.ts
 src/index.html

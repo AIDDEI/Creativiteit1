@@ -40,8 +40,6 @@ export class App{
 
     onClick() {
         console.log("klik");
-        // document.getElementsByTagName('canvas')[0].remove();
-        // new Game();
         window.location.href="game.html"
     }
 }

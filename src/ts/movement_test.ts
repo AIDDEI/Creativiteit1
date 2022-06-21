@@ -7,6 +7,9 @@ import testBack from '../images/test_background2.jpg';
 import testGround from '../images/test_ground2.jpg';
 import testBlock from '../images/block.jpg';
 
+// Import Sound
+import themeSoundFile from 'url:../sound/theme.wav';
+
 // Import Classes
 import { Char } from './test_char';
 import { Ground } from './test_ground';
@@ -22,9 +25,11 @@ export class Game{
     private loader : PIXI.Loader;
 
     private char : Char;
-    private ground : Ground;
-    private block : Block;
+    private grounds : Ground[];
+    private blocks : Block[];
     private background : Background;
+
+    private themeSound: HTMLAudioElement = new Audio(themeSoundFile);
 
     constructor(){
         // Create PIXI Stage
@@ -32,6 +37,10 @@ export class Game{
         this.pixi.stage.interactive = true;
         this.pixi.stage.hitArea = this.pixi.renderer.screen;
         document.body.appendChild(this.pixi.view);
+
+        // Arrays
+        this.blocks = [];
+        this.grounds = [];
 
         // Create Loader
         this.loader = new PIXI.Loader();
@@ -44,21 +53,28 @@ export class Game{
     }
 
     private loadCompleted(){
+        // Play theme & loop theme
+        this.themeSound.play();
+        this.themeSound.addEventListener('ended', function(){
+            this.currentTime = 0;
+            this.play();
+        }, false);
+
         // Adding background to game
         this.background = new Background(this.loader.resources["backgroundTexture"].texture!, this.pixiWidth, this.pixiHeight);
         this.pixi.stage.addChild(this.background);
 
-        // Adding ground to game
-        this.ground = new Ground(this.loader.resources["groundTexture"].texture!);
-        this.pixi.stage.addChild(this.ground);
-
-        // Adding block to game
-        this.block = new Block(this.loader.resources["blockTexture"].texture!);
-        this.pixi.stage.addChild(this.block);
-
         // Adding player to game
         this.char = new Char(this.loader.resources["charTexture"].texture!);
         this.pixi.stage.addChild(this.char);
+
+        // Adding grounds to game
+        this.createGround(20, 350);
+        this.createGround(750, 350);
+
+        // Adding blocks to game
+        this.createBlock(350, 150);
+        this.createBlock(600, 278);
 
         // Update
         this.pixi.ticker.add((delta) => this.update(delta));
@@ -68,25 +84,49 @@ export class Game{
         // Update player
         this.char.update(delta);
 
-        // Vertical collision player with ground
-        if(this.char.collisionVerticalTop(this.ground) && this.char.y + this.char.height < this.ground.y + this.char.yspeed){
-            this.char.y = this.ground.y - this.char.height;
-            this.char.yspeed = 0;
+        // Background scroll
+        this.background.update();
+        
+
+        // Ground collision
+        for(let ground of this.grounds){
+            if(this.char.collisionVerticalTop(ground) && this.char.y + this.char.height < ground.y + this.char.yspeed){
+                this.char.y = ground.y - this.char.height;
+                this.char.yspeed = 0;
+            }
+
+            this.char.collisionHorizontal(ground);
+
+            this.char.collisionVerticalBottom(ground);
         }
 
-        // Vertical collision player with block
-        if(this.char.collisionVerticalTop(this.block) && this.char.y + this.char.height < this.block.y + this.char.yspeed){
-            this.char.y = this.block.y - this.char.height;
-            this.char.yspeed = 0;
+        // Block collision
+        for(let block of this.blocks){
+            if(this.char.collisionVerticalTop(block) && this.char.y + this.char.height < block.y + this.char.yspeed){
+                this.char.y = block.y - this.char.height;
+                this.char.yspeed = 0;
+            }
+
+            this.char.collisionHorizontal(block);
+
+            this.char.collisionVerticalBottom(block);
         }
+    }
 
-        // Horizontal collision player with ground & block
-        this.char.collisionHorizontal(this.ground);
-        this.char.collisionHorizontal(this.block);
+    private createBlock(x: number, y: number){
+        let block = new Block(this.loader.resources["blockTexture"].texture!);
+        block.x = x;
+        block.y = y;
+        this.blocks.push(block);
+        this.pixi.stage.addChild(block);
+    }
 
-        // Vertical bottom collision player with ground & block
-        this.char.collisionVerticalBottom(this.block);
-        this.char.collisionVerticalBottom(this.ground);
+    private createGround(x: number, y: number){
+        let ground = new Ground(this.loader.resources["groundTexture"].texture!);
+        ground.x = x;
+        ground.y = y;
+        this.grounds.push(ground);
+        this.pixi.stage.addChild(ground);
     }
 }
 

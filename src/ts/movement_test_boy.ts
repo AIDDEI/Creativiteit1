@@ -40,10 +40,10 @@ export class Game{
     }
 
     loadCompleted(){
-        // let background = new PIXI.Sprite(this.loader.resources["backgroundTexture"].texture!);
-        // background.height = this.pixiHeight;
-        // background.width = this.pixiWidth;
-        // this.pixi.stage.addChild(background);
+        let background = new PIXI.Sprite(this.loader.resources["backgroundTexture"].texture!);
+        background.height = this.pixiHeight;
+        background.width = this.pixiWidth;
+        this.pixi.stage.addChild(background);
 
         this.bg = new Background(this.pixi.loader.resources["backgroundTexture"].texture!, this.pixi.screen.width, this.pixi.screen.height)
         this.pixi.stage.addChild(this.bg)
