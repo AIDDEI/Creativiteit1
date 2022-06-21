@@ -17,6 +17,7 @@ export class Char extends PIXI.Sprite {
     private walkLeft = false;
     private walkLeftLock = false;
     private walkRightLock = false;
+    private allBlocksArray;
     
     // Sounds
     private jumpSound: HTMLAudioElement = new Audio(jumpSoundFile);
@@ -25,7 +26,7 @@ export class Char extends PIXI.Sprite {
     private pushSound: HTMLAudioElement = new Audio(pushSoundFile);
     private headBumpSound: HTMLAudioElement = new Audio(headBumpSoundFile);
 
-    constructor(texture: PIXI.Texture){
+    constructor(texture: PIXI.Texture, allBlocks: Array<PIXI.Sprite>){
         super(texture);
         this.anchor.set(0);
 
@@ -36,6 +37,9 @@ export class Char extends PIXI.Sprite {
         // Setting width & height
         this.width = 51;
         this.height = 72;
+
+        // Blocks array
+        this.allBlocksArray = allBlocks;
         
         // Adding event listeners for keyboard
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e));
@@ -44,7 +48,10 @@ export class Char extends PIXI.Sprite {
 
     public update(delta: number) {
         // player movement & speed
-        this.x += delta * this.xspeed;
+        for(let i = 0; i < this.allBlocksArray.length; i++){
+            this.allBlocksArray[i].x += -delta * this.xspeed;
+        }
+
         this.y += delta * this.yspeed;
 
         // player gravity

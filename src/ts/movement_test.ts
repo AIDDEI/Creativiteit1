@@ -29,6 +29,8 @@ export class Game{
     private blocks : Block[];
     private background : Background;
 
+    public gameArray : Array<PIXI.Sprite>;
+
     private themeSound: HTMLAudioElement = new Audio(themeSoundFile);
 
     constructor(){
@@ -41,6 +43,7 @@ export class Game{
         // Arrays
         this.blocks = [];
         this.grounds = [];
+        this.gameArray = [];
 
         // Create Loader
         this.loader = new PIXI.Loader();
@@ -65,7 +68,7 @@ export class Game{
         this.pixi.stage.addChild(this.background);
 
         // Adding player to game
-        this.char = new Char(this.loader.resources["charTexture"].texture!);
+        this.char = new Char(this.loader.resources["charTexture"].texture!, this.gameArray);
         this.pixi.stage.addChild(this.char);
 
         // Adding grounds to game
@@ -114,6 +117,7 @@ export class Game{
         block.x = x;
         block.y = y;
         this.blocks.push(block);
+        this.gameArray.push(block);
         this.pixi.stage.addChild(block);
     }
 
@@ -122,6 +126,7 @@ export class Game{
         ground.x = x;
         ground.y = y;
         this.grounds.push(ground);
+        this.gameArray.push(ground);
         this.pixi.stage.addChild(ground);
     }
 }
