@@ -60,6 +60,7 @@ export class Char extends PIXI.Sprite {
         // Fall offscreen
         if(this.y > 500){
             this.deathSound.play();
+            this.deathSound.volume = 0.1;
             this.resetPosition();
         }
 
@@ -98,6 +99,7 @@ export class Char extends PIXI.Sprite {
                 // If both statements are true, the player will fall down
                 this.yspeed = 3;
                 this.headBumpSound.play();
+                this.headBumpSound.volume = 0.4;
             }
         }
     }
@@ -113,6 +115,7 @@ export class Char extends PIXI.Sprite {
                 this.walkRight = false;
                 this.x = object.x - this.width - 1;
                 this.pushSound.play();
+                this.pushSound.volume = 0.4;
             }
         } else {
             // Else the lock of walking right is false, so the player can walk to the right
@@ -129,6 +132,7 @@ export class Char extends PIXI.Sprite {
                 this.walkLeft = false;
                 this.x = object.x + object.width + 1;
                 this.pushSound.play();
+                this.pushSound.volume = 0.4;
             }
         } else {
             // Else the lock of walking left is false, so the player can walk to the left
@@ -148,6 +152,7 @@ export class Char extends PIXI.Sprite {
                 // AND if space, arrow up or W is pressed
                 this.yspeed = -9;
                 this.jumpSound.play();
+                this.jumpSound.volume = 0.4;
             }
         }
         switch (e.key.toUpperCase()) {
@@ -158,6 +163,7 @@ export class Char extends PIXI.Sprite {
                     // AND the arrow left or A is pressed
                     this.walkLeft = true;
                     this.footstepSound.play();
+                    this.footstepSound.volume = 0.4;
                 }
                 break;
             case "D":
@@ -167,6 +173,8 @@ export class Char extends PIXI.Sprite {
                     // AND the arrow right or D is pressed
                     this.walkRight = true;
                     this.footstepSound.play();
+                    this.footstepSound.volume = 0.4;
+                    
                 }
                 break;
         }

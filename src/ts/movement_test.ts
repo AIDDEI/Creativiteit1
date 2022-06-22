@@ -3,7 +3,7 @@ import * as PIXI from 'pixi.js';
 
 // Import Images
 import testChar from '../images/Char1_1.png';
-import testBack from '../images/test_background2.jpg';
+import testBack from '../images/background.png';
 import testGround from '../images/test_ground2.jpg';
 import testBlock from '../images/block.jpg';
 
@@ -32,6 +32,7 @@ export class Game{
     public gameArray : Array<PIXI.Sprite>;
 
     private themeSound: HTMLAudioElement = new Audio(themeSoundFile);
+    
 
     constructor(){
         // Create PIXI Stage
@@ -58,6 +59,7 @@ export class Game{
     private loadCompleted(){
         // Play theme & loop theme
         this.themeSound.play();
+        this.themeSound.volume = 0.8;
         this.themeSound.addEventListener('ended', function(){
             this.currentTime = 0;
             this.play();
