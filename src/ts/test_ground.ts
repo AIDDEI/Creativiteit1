@@ -11,7 +11,7 @@ export class Ground extends PIXI.Sprite{
         this.y = 350;
 
         // Setting the width & height
-        this.width = 3000;
+        this.width = 300;
         this.height = 70;
     }
 }

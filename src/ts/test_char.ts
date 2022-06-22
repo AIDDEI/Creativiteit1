@@ -11,8 +11,8 @@ import headBumpSoundFile from 'url:../sound/head_bump.wav';
 export class Char extends PIXI.Sprite {
     // Globals
     public xspeed = 0;
-    public yspeed = 3;
-    private weigth = 0.3;
+    public yspeed = 5;
+    private weigth = 0.2;
     private walkRight = false;
     private walkLeft = false;
     private walkLeftLock = false;
@@ -31,8 +31,8 @@ export class Char extends PIXI.Sprite {
         this.anchor.set(0);
 
         // Setting start position
-        this.x = 80;
-        this.y = 60;
+        this.x = 60;
+        this.y = 190;
 
         // Setting width & height
         this.width = 51;
