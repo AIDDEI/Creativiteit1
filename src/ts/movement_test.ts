@@ -4,8 +4,8 @@ import * as PIXI from 'pixi.js';
 // Import Images
 import testChar from '../images/Char1_1.png';
 import testBack from '../images/background.png';
-// import testGround from '../images/test_ground2.jpg';
-import testGround from '../images/platform.png';
+import testGround from '../images/test_ground2.jpg';
+// import cloudGround from '../images/platform.png';
 import testBlock from '../images/block.jpg';
 
 // Import Sound
@@ -16,6 +16,7 @@ import { Char } from './test_char';
 import { Ground } from './test_ground';
 import { Block } from './test_block';
 import { Background } from './background';
+import { UI } from './UI';
 
 export class Game{
     // Globals
@@ -29,6 +30,7 @@ export class Game{
     private grounds : Ground[];
     private blocks : Block[];
     private background : Background;
+    private interface : UI;     
 
     public gameArray : Array<PIXI.Sprite>;
 
@@ -53,6 +55,7 @@ export class Game{
             .add('charTexture', testChar)
             .add('backgroundTexture', testBack)
             .add('groundTexture', testGround)
+            // .add('platform', cloudGround)
             .add('blockTexture', testBlock);
         this.loader.load(()=>this.loadCompleted());
     }
@@ -73,6 +76,10 @@ export class Game{
         // Adding player to game
         this.char = new Char(this.loader.resources["charTexture"].texture!, this.gameArray);
         this.pixi.stage.addChild(this.char);
+
+        // Adds interface
+        this.interface = new UI()
+        this.pixi.stage.addChild(this.interface)
 
         // Adding grounds to game
         this.createGround(20, 350);
@@ -129,6 +136,7 @@ export class Game{
 
     private createGround(x: number, y: number){
         let ground = new Ground(this.loader.resources["groundTexture"].texture!);
+        // let cloud = new Ground(this.loader.resources["platform"].texture!);
         ground.x = x;
         ground.y = y;
         this.grounds.push(ground);

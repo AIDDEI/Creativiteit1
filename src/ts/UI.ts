@@ -16,7 +16,7 @@ export class UI extends PIXI.Container {
         })
     
         this.scoreField = new PIXI.Text(`Timer: `, style)
-        this.addChild(this.scoreField)
+        // this.addChild(this.scoreField)
         this.scoreField.x = 10
         this.scoreField.y = 10
     }
