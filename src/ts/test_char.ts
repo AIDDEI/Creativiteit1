@@ -58,7 +58,7 @@ export class Char extends PIXI.Sprite {
         this.yspeed += this.weigth;
 
         // Fall offscreen
-        if(this.y > ){
+        if(this.y > 500){
             this.deathSound.play();
             this.deathSound.volume = 0.1;
             this.resetPosition();
