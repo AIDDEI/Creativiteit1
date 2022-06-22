@@ -19,7 +19,7 @@ import { Background } from './background';
 export class Game{
     // Globals
     public pixiWidth = 800;
-    public pixiHeight = 450;
+    public pixiHeight = 500;
 
     private pixi : PIXI.Application;
     private loader : PIXI.Loader;
@@ -74,12 +74,114 @@ export class Game{
         this.pixi.stage.addChild(this.char);
 
         // Adding grounds to game
-        this.createGround(20, 350);
-        this.createGround(750, 350);
+        this.createGround(0, 430);
+        this.createGround(300, 430);
+        this.createGround(3500, 430);
+        this.createGround(3800, 430);
+        this.createGround(4100, 430);
+        this.createGround(4700, 430);
+        this.createGround(5000, 430);
+        this.createGround(6700, 430);
+        this.createGround(7000, 430);
+        this.createGround(7300, 430);
+        this.createGround(8000, 430);
+        this.createGround(8300, 430);
+        this.createGround(9700, 430);
+        this.createGround(10000, 430);
 
         // Adding blocks to game
-        this.createBlock(350, 150);
-        this.createBlock(600, 278);
+        this.createBlock(350, 240);
+        this.createBlock(600, 240);
+        this.createBlock(670, 240);
+        this.createBlock(740, 240);
+        this.createBlock(810, 240);
+        this.createBlock(880, 240);
+        this.createBlock(740, 70);
+
+        this.createBlock(1350, 440);
+        this.createBlock(1350, 370);
+        this.createBlock(1350, 350);
+        this.createBlock(1420, 440);
+        this.createBlock(1420, 370);
+        this.createBlock(1420, 350);
+
+        this.createBlock(1650, 190);
+        this.createBlock(1920, 440);
+        this.createBlock(1920, 370);
+        this.createBlock(1920, 300);
+        this.createBlock(1990, 440);
+        this.createBlock(1990, 370);
+        this.createBlock(1990, 300);
+
+        this.createBlock(2350, 440);
+        this.createBlock(2350, 370);
+        this.createBlock(2350, 300);
+        this.createBlock(2420, 440);
+        this.createBlock(2420, 370);
+        this.createBlock(2420, 300);
+
+        this.createBlock(2910, 440);
+        this.createBlock(2910, 370);
+        this.createBlock(2910, 300);
+        this.createBlock(2910, 250);
+        this.createBlock(2980, 440);
+        this.createBlock(2980, 370);
+        this.createBlock(2980, 300);
+        this.createBlock(2980, 250);
+
+        this.createBlock(3800, 240);
+        this.createBlock(3870, 240);
+        this.createBlock(3940, 240);
+
+        this.createBlock(4010, 60);
+        this.createBlock(4080, 60);
+        this.createBlock(4150, 60);
+        this.createBlock(4220, 60);
+        this.createBlock(4290, 60);
+        this.createBlock(4690, 60);
+        this.createBlock(4760, 60);
+        this.createBlock(4830, 60);
+
+        this.createBlock(4830, 240);
+        this.createBlock(5340, 240);
+        this.createBlock(5640, 240);
+        this.createBlock(5940, 240);
+        this.createBlock(6240, 240);
+        this.createBlock(5940, 60);
+        this.createBlock(7000, 240);
+
+        // Staircase 1
+        this.createBlock(7530, 150);
+        this.createBlock(7530, 220);
+        this.createBlock(7530, 290);
+        this.createBlock(7530, 358);
+        this.createBlock(7460, 150);
+        this.createBlock(7460, 220);
+        this.createBlock(7460, 290);
+        this.createBlock(7460, 358);
+        this.createBlock(7390, 220);
+        this.createBlock(7390, 290);
+        this.createBlock(7390, 358);
+        this.createBlock(7320, 290);
+        this.createBlock(7320, 358);
+        this.createBlock(7250, 358);
+
+        // Staircase 2
+        this.createBlock(8000, 150);
+        this.createBlock(8000, 220);
+        this.createBlock(8000, 290);
+        this.createBlock(8000, 358);
+        this.createBlock(8070, 220);
+        this.createBlock(8070, 290);
+        this.createBlock(8070, 358);
+        this.createBlock(8140, 290);
+        this.createBlock(8140, 358);
+        this.createBlock(8210, 358);
+
+        // Ending jumps
+        this.createBlock(8750, 240);
+        this.createBlock(9020, 200);
+        this.createBlock(9390, 240);
 
         // Update
         this.pixi.ticker.add((delta) => this.update(delta));
