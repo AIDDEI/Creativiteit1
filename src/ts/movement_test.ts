@@ -4,7 +4,8 @@ import * as PIXI from 'pixi.js';
 // Import Images
 import testChar from '../images/Char1_1.png';
 import testBack from '../images/background.png';
-import testGround from '../images/test_ground2.jpg';
+// import testGround from '../images/test_ground2.jpg';
+import testGround from '../images/platform.png';
 import testBlock from '../images/block.jpg';
 
 // Import Sound
