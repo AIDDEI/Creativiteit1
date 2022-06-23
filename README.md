@@ -1,3 +1,2 @@
 # Creativiteit1
-Voor de beoordelaars van onze game/prototype:
-Helaas werkt onze game niet via Github-pages, dus ons project moet worden gekopieerd in Visual Studio Code, excuus.
+Speel de game : <a href="https://aiddei.github.io/Creativiteit1/">DreamSolve 1.0</a>
